@@ -17,6 +17,12 @@ let g:pymode_rope_complete_on_dot = 0
 
 " Raccourcis claviers quelques customisations
 "
+" pour un leader plus accessible (sans altgrrrrr)
+
+let mapleader=","
+
+
+"
 "     Déplacement dans les splits
 map <c-j> <c-w>j
 map <c-k> <c-w>k
@@ -28,14 +34,30 @@ map <c-h> <c-w>h
 "   On doit forcer vim à utiliser 256 couleurs pour etre raccro avec le
 "   terminal
 set t_Co=256
-colorscheme railscasts
+colorscheme desertink
 
 " Quelques raccourcis utiles
 "
-:map :tree :NERDTree
+map :tree :NERDTree
+" Déplacer des lignes vers le bas / vers le haut
+"
+map - ddp
+map _ ddkkp
+"
+" Navigation en mode insertion
+imap <c-j> <esc>jli
+imap <c-k> <esc>kli
+imap <c-l> <esc>lli
+imap <c-h> <esc>i
+
+"
+" Sortir du mode insertion en évitant le pénible recul du curseur
+imap <c-c> <esc>l
+
 
 
 " Plugin supertab
+"
 "
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
@@ -69,3 +91,13 @@ nn <script> <SID>ws> <C-W>5><SID>ws
 nn <script> <SID>ws< <C-W>5<<SID>ws
 nmap <SID>ws <Nop>
 
+
+" Configuration de pymode
+"
+let g:pymode_rope_autoimport = 1
+
+
+" Navigation dans les buffers
+"
+"
+:nnoremap <F5> :buffers<CR>:buffer<Space>
