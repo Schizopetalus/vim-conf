@@ -10,9 +10,6 @@ filetype on
 filetype plugin indent on
 syntax on
 
-" Pour désactiver l'autocomplétion qui fout un peu la grouille
-"
-let g:pymode_rope_complete_on_dot = 0
 
 
 " Raccourcis claviers quelques customisations
@@ -20,8 +17,23 @@ let g:pymode_rope_complete_on_dot = 0
 " pour un leader plus accessible (sans altgrrrrr)
 
 let mapleader=","
+nnoremap <Space> i_<Esc>r
 
 
+"
+"
+" editer le vimrc rapidement
+"
+:nnoremap <leader>ev :split $MYVIMRC<cr>
+" sourcer le vimrc
+:nnoremap <leader>sv :source $MYVIMRC<cr>
+
+
+"
+" Pour désactiver l'autocomplétion qui fout un peu la grouille
+"
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_rope_goto_definition_cmd = 'tabedit'
 "
 "     Déplacement dans les splits
 map <c-j> <c-w>j
@@ -33,8 +45,13 @@ map <c-h> <c-w>h
 "
 "   On doit forcer vim à utiliser 256 couleurs pour etre raccro avec le
 "   terminal
-set t_Co=256
+if has('gui_running')
+
+else
+	set t_Co=256
+endif
 colorscheme desertink
+"colorscheme zellner
 
 " Quelques raccourcis utiles
 "
@@ -51,9 +68,21 @@ imap <c-l> <esc>lli
 imap <c-h> <esc>i
 
 "
-" Sortir du mode insertion en évitant le pénible recul du curseur
-imap <c-c> <esc>l
+"
+" Mise en majuscules d'un mot
+"imap <c-u> <esc>bveUi
+"nmap <c-u> bveU
+" (trouver un nom de raccourci qui ne nique pas le scroll...)
 
+"
+" Sortir du mode insertion
+inoremap <c-c> <nop>
+inoremap jk <esc>
+
+"
+" Mettre en relif la ligne courante
+
+set cursorline
 
 
 " Plugin supertab
@@ -101,3 +130,30 @@ let g:pymode_rope_autoimport = 1
 "
 "
 :nnoremap <F5> :buffers<CR>:buffer<Space>
+
+" Mise entre guillemets simples / doubles
+"
+:nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
+:nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+
+" gvim specific options
+"
+if has('gui_running')
+	set guioptions=i
+	"
+	" copier /coller contenu du presse papier système
+	"
+	:nnoremap <leader>C "+yy
+	:nnoremap <leader>V "+p
+	:xnoremap <leader>C "+y
+	:vnoremap <leader>C "+y
+endif
+
+
+
+"
+"
+"
+" Abbréviations utiles
+"
+iabbrev  coding # -*- coding: utf-8 -*-
