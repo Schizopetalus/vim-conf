@@ -1,5 +1,5 @@
 set nocompatible
-
+"
 " Initialisation de pathogen
 " il est recommandé de désactiver d'abord la détection du filetype
 filetype off
@@ -10,6 +10,9 @@ filetype on
 filetype plugin indent on
 syntax on
 
+
+" Pouvoir quitter un buffer non sauvé
+set hidden
 
 
 " Raccourcis claviers quelques customisations
@@ -24,22 +27,23 @@ nnoremap <Space> i_<Esc>r
 "
 " editer le vimrc rapidement
 "
-:nnoremap <leader>ev :split $MYVIMRC<cr>
+nnoremap <leader>ev :split $MYVIMRC<cr>
 " sourcer le vimrc
-:nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 
-"
-" Pour désactiver l'autocomplétion qui fout un peu la grouille
-"
-let g:pymode_rope_complete_on_dot = 0
-let g:pymode_rope_goto_definition_cmd = 'tabedit'
 "
 "     Déplacement dans les splits
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
+"
+"
+" Ouvrir un nouveau split en bas / à droite par défaut
+set splitbelow
+set splitright
+
 
 " Thème de couleur par défaut
 "
@@ -91,6 +95,24 @@ set cursorline
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
+
+
+"
+"Plugin Python-mode
+"
+"
+" Pour désactiver l'autocomplétion qui fout un peu la grouille
+"
+let g:pymode_rope_complete_on_dot = 0
+"let g:pymode_rope_goto_definition_cmd = 'tabedit'
+" Pas de fenêtre ouverte lors de la vérification syntaxique
+let g:pymode_lint_cwindow=0
+
+" On ne veut pas les erreurs pep8 lors de la vérification syntaxique
+let g:pymode_lint_checkers=['pyflakes','mccabe']
+" commande utile : permet de fermer / réafficher le buffer courant (quand le
+" vérification syntaxique se désamorce mystérieusement)
+nnoremap rr :let courant=@% <cr>:bdelete % <cr>:execute "e "courant<cr>
 
 " Divers
 "
@@ -147,6 +169,13 @@ if has('gui_running')
 	:nnoremap <leader>V "+p
 	:xnoremap <leader>C "+y
 	:vnoremap <leader>C "+y
+	" fontes disponibles
+	" Monospace\ 10   (+ Monospace\ Italic\ 10, Monospace\ Bold\ 10)
+	" Andale\ Mono\ 10
+	" LiberationMono\ 10
+	" Courier\ New\ 10
+	:set guifont=Courier\ New\ 11
+
 endif
 
 
