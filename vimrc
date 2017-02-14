@@ -22,7 +22,12 @@ set hidden
 let mapleader=","
 nnoremap <Space> i_<Esc>r
 
+" Quelques raccourcis utiles
+"
+nnoremap <c-n>t :NERDTree<cr>
+nnoremap <c-n>c :NERDTreeClose<cr>
 
+nnoremap <c-n> <nop>
 "
 "
 " editer le vimrc rapidement
@@ -31,6 +36,9 @@ nnoremap <leader>ev :split $MYVIMRC<cr>
 " sourcer le vimrc
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
+" Désactiver le bip et la visualbell
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
 
 "
 "     Déplacement dans les splits
@@ -57,19 +65,10 @@ endif
 colorscheme desertink
 "colorscheme zellner
 
-" Quelques raccourcis utiles
-"
-map :tree :NERDTree
 " Déplacer des lignes vers le bas / vers le haut
 "
 map - ddp
 map _ ddkkp
-"
-" Navigation en mode insertion
-imap <c-j> <esc>jli
-imap <c-k> <esc>kli
-imap <c-l> <esc>lli
-imap <c-h> <esc>i
 
 "
 "
@@ -128,8 +127,8 @@ set wrap
 set mouse=a	" activer la souris
 
 " Pour agrandir et réduire plus facilement les splits : 
-" Ctrl-W ++++++ Ctrl-W --------
 " Ctrl-W >>>>>> Ctrl-W <<<<<<<
+" Ctrl-W ++++++ Ctrl-W --------
 nmap <c-w>+ <c-w>5+<SID>ws
 nmap <c-w>- <c-w>5-<SID>ws
 nn <script> <SID>ws+ <C-W>5+<SID>ws
@@ -186,3 +185,11 @@ endif
 " Abbréviations utiles
 "
 iabbrev  coding # -*- coding: utf-8 -*-
+
+
+" 
+"
+" NERDTree
+"
+let NERDTreeIgnore = ['\.pyc$']
+
