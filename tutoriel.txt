@@ -1,0 +1,34 @@
+Exécuter du vimscript
+
+On peut sélectionner les lignes suivantes (en mode visuel) et les exécuter avec la commande :@
+
+:if "on" == "on"
+:   echom "toto"
+:endif
+
+sinon on peut exécuter tout le buffer avec la commande:
+
+:%y|@"<CR>
+(voir sur : https://vi.stackexchange.com/questions/3186/execute-content-of-buffer-as-vimscript )
+
+(note : @" variable qui représente le registre ", idem @r, @', etc...
+c'est puissant on peut l'utiliser dans n'importe quelle commande,
+par exemple :
+:echom @" pour l'afficher )
+
+TODO : travailler sur l'exécution de commandes externes avec vim
+Pages trouvées à ce sujet:
+https://www.linux.com/learn/vim-tips-working-external-commands
+https://www.howtoforge.com/tutorial/how-to-access-shell-or-run-external-commands-from-within-vim/
+http://blog.endpoint.com/2009/03/vim-tip-of-day-running-external.html
+
+(idée d'application : faire une commande qui permet d'ouvrir firefox sur chacune des urls précédentes)
+
+
+
+
+
+
+
+
+
