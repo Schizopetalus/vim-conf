@@ -10,13 +10,6 @@ filetype on
 filetype plugin indent on
 syntax on
 
-" historique des commandes et des recherches étendu
-set viminfo='100,<50,s10,h,:10000,/10000
-
-" config specifique ...
-"let cmdline_app = {}
-"let cmdline_app['python'] = 'ipython'
-
 
 " Pouvoir quitter un buffer non sauvé
 set hidden
@@ -192,7 +185,6 @@ endif
 " Abbréviations utiles
 "
 iabbrev  coding # -*- coding: utf-8 -*-
-iabbrev bkp import pdb; pdb.set_trace()
 
 
 " 
