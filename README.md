@@ -1,2 +1,2 @@
 # vim-conf
-Tous les fichiers / plugins de git
+Tous les fichiers / plugins de vim
