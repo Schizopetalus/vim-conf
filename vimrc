@@ -10,10 +10,26 @@ filetype on
 filetype plugin indent on
 syntax on
 
+" complétion des noms de fichiers en mode insertion - raccourci plus commode
+imap <Tab> <C-X><C-F>
 
 " Pouvoir quitter un buffer non sauvé
 set hidden
 
+" backup files dans un dossier spécifique et plus dans le dossier courant
+"
+set backupdir=~/local/config/vimbackup,.
+set directory=~/local/config/vimbackup,.
+set undodir=~/local/config/vimbackup,.
+
+
+
+
+" Config vimcmdline
+let cmdline_app           = {}
+"let cmdline_app['python'] = 'ipython'
+let cmdline_app['python'] = 'jupyter console --existing'
+"let cmdline_vsplit      = 1      " Split the window vertically
 
 " Raccourcis claviers quelques customisations
 "
@@ -22,12 +38,6 @@ set hidden
 let mapleader=","
 nnoremap <Space> i_<Esc>r
 
-" Quelques raccourcis utiles
-"
-nnoremap <c-n>t :NERDTree<cr>
-nnoremap <c-n>c :NERDTreeClose<cr>
-
-nnoremap <c-n> <nop>
 "
 "
 " editer le vimrc rapidement
@@ -62,13 +72,20 @@ if has('gui_running')
 else
 	set t_Co=256
 endif
-colorscheme desertink
-"colorscheme zellner
+"colorscheme desertink
+syntax enable
+set background=light
+"colorscheme solarized
+colorscheme PaperColor
 
 " Déplacer des lignes vers le bas / vers le haut
 "
 map - ddp
 map _ ddkkp
+
+" Copier coller dans le presse-papier système
+vmap <C-S-c> "+y
+nmap <C-S-c> "+yy
 
 "
 "
@@ -173,7 +190,7 @@ if has('gui_running')
 	" Andale\ Mono\ 10
 	" LiberationMono\ 10
 	" Courier\ New\ 10
-	:set guifont=Courier\ New\ 11
+	:set guifont=Courier\ 10\ Pitch\ 12
 
 endif
 
@@ -185,11 +202,32 @@ endif
 " Abbréviations utiles
 "
 iabbrev  coding # -*- coding: utf-8 -*-
+iabbrev  ipdb import ipdb; ipdb.set_trace()
 
 
 " 
 "
 " NERDTree
 "
-let NERDTreeIgnore = ['\.pyc$']
+let NERDTreeIgnore = ['\.pyc$','\~$']
+nnoremap <c-n>t :NERDTreeToggle<cr>
+nnoremap <c-n>c :NERDTreeClose<cr>
 
+nnoremap <c-n> <nop>
+
+
+
+function! TabMessage(cmd)
+  redir => message
+  silent execute a:cmd
+  redir END
+  if empty(message)
+    echoerr "no output"
+  else
+    " use "new" instead of "tabnew" below if you prefer split windows instead of tabs
+    new
+    setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
+    silent put=message
+  endif
+endfunction
+command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
