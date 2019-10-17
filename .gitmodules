@@ -1,9 +1,6 @@
 [submodule "pathogen"]
 	path = pathogen
 	url = https://github.com/tpope/vim-pathogen
-[submodule "bundle/python-mode"]
-	path = bundle/python-mode
-	url = https://github.com/klen/python-mode
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree
